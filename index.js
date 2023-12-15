@@ -122,7 +122,7 @@ class Router {
     const elem = await match.route.view();
 
     this.target.innerHTML = "";
-    this.target.insertAdjacentElement("afterbegin", elem);
+    this.target.append(elem);
   }
 }
 
