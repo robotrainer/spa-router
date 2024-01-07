@@ -16,7 +16,7 @@ class Router {
   /**
    * Инициализирует роутер
    * @this {Router} объект Router
-   * @param {{target: Element, routes: Array<{path: string, view: Element}>}} params 
+   * @param {{target: Element, routes: Array<{path: string, view: Element}>}} params
    * Параметры инициализации
    * 1. target - контейнер встривания страниц
    * 2. routes - список путей до страниц
@@ -40,7 +40,7 @@ class Router {
       this.router();
     });
 
-    document.addEventListener("DOMContentLoaded", () => {
+    const initNavigation = () => {
       document.body.addEventListener("click", (e) => {
         if (e.target.matches("[data-link]")) {
           e.preventDefault();
@@ -49,7 +49,13 @@ class Router {
       });
 
       this.router();
-    });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initNavigation);
+    } else {
+      initNavigation();
+    }
   }
 
   /**
