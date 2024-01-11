@@ -110,7 +110,6 @@ class Router {
   navigate(endPoint) {
     history.pushState(null, null, location.origin + endPoint);
     location.reload();
-    this.router();
   }
 
   /**
