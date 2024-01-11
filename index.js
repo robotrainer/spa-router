@@ -44,7 +44,7 @@ class Router {
       document.body.addEventListener("click", (e) => {
         if (e.target.matches("[data-link]")) {
           e.preventDefault();
-          this.navigateTo(e.target.href);
+          this.#navigateTo(e.target.href);
         }
       });
 
@@ -72,6 +72,16 @@ class Router {
   }
 
   /**
+   * Направляет на указанный url страницы
+   * @this {Router} объект Router
+   * @param {string} url - полный адрес страницы
+   */
+  #navigateTo(url) {
+    history.pushState(null, null, url);
+    this.router();
+  }
+
+  /**
    * Получает значение параметра из пути до страницы
    * @this {Router} объект Router
    * @param {string} path - путь до страницы
@@ -93,12 +103,13 @@ class Router {
   }
 
   /**
-   * Направляет на указанный url страницы
+   * Направляет на указанный endPoint страницы
    * @this {Router} объект Router
-   * @param {string} url - полный адрес страницы
+   * @param {string} endPoint - конечная точка путь до страницы
    */
-  navigateTo(url) {
-    history.pushState(null, null, url);
+  navigate(endPoint) {
+    history.pushState(null, null, location.origin + endPoint);
+    location.reload();
     this.router();
   }
 
